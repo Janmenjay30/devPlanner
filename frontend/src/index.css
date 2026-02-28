@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-dark-900 text-dark-200 antialiased;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-dark-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-dark-600 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-dark-500;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark-900;
+  }
+  .btn-secondary {
+    @apply bg-dark-700 hover:bg-dark-600 text-dark-200 font-medium py-2 px-4 rounded-lg transition-all duration-200 border border-dark-600;
+  }
+  .btn-danger {
+    @apply bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200;
+  }
+  .btn-ghost {
+    @apply text-dark-400 hover:text-dark-200 hover:bg-dark-700 font-medium py-2 px-4 rounded-lg transition-all duration-200;
+  }
+  .card {
+    @apply bg-dark-800 border border-dark-700 rounded-xl p-6 transition-all duration-200;
+  }
+  .card-hover {
+    @apply card hover:border-primary-500/30 hover:shadow-lg hover:shadow-primary-500/5;
+  }
+  .input-field {
+    @apply w-full bg-dark-700 border border-dark-600 text-dark-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 placeholder-dark-500;
+  }
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  .badge-coding { @apply bg-blue-500/20 text-blue-400; }
+  .badge-study { @apply bg-green-500/20 text-green-400; }
+  .badge-project { @apply bg-purple-500/20 text-purple-400; }
+  .badge-placement { @apply bg-yellow-500/20 text-yellow-400; }
+  .badge-personal { @apply bg-pink-500/20 text-pink-400; }
+  .badge-health { @apply bg-emerald-500/20 text-emerald-400; }
+  .badge-other { @apply bg-gray-500/20 text-gray-400; }
+  .priority-low { @apply text-blue-400; }
+  .priority-medium { @apply text-yellow-400; }
+  .priority-high { @apply text-orange-400; }
+  .priority-urgent { @apply text-red-400; }
+}
