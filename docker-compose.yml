@@ -1,0 +1,49 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: helperbuddy-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+    container_name: helperbuddy-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 5003
+      CLIENT_URL: http://localhost
+      MONGODB_URI: mongodb://mongo:27017/devplanner
+      JWT_SECRET: change-me
+      GEMINI_API_KEY: ""
+      EMAIL_HOST: ""
+      EMAIL_PORT: "587"
+      EMAIL_USER: ""
+      EMAIL_PASS: ""
+    depends_on:
+      mongo:
+        condition: service_healthy
+    ports:
+      - "5003:5003"
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: helperbuddy-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+
+volumes:
+  mongo_data:

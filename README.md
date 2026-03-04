@@ -225,6 +225,54 @@ Open **http://localhost:5173** in your browser.
 
 ---
 
+## Docker Setup
+
+This repository now includes:
+
+- `backend/Dockerfile`
+- `frontend/Dockerfile`
+- `frontend/nginx.conf` (reverse proxy for `/api` and `/socket.io`)
+- `docker-compose.yml`
+
+### Run with Docker Compose
+
+```bash
+# from project root
+docker compose up --build -d
+```
+
+App URLs:
+
+- Frontend: `http://localhost`
+- Backend API health: `http://localhost:5003/api/health`
+
+Stop services:
+
+```bash
+docker compose stop
+```
+
+If you want to keep MongoDB data volume but stop containers:
+
+```bash
+docker compose down
+```
+
+If you want to remove MongoDB volume as well:
+
+```bash
+docker compose down -v
+```
+
+### Deploy to AWS (recommended flow)
+
+1. Build/push `backend` and `frontend` images to **Amazon ECR**.
+2. Deploy with **Amazon ECS Fargate** (or EC2 + Docker Compose).
+3. Use **Amazon DocumentDB** or **MongoDB Atlas** instead of local Mongo in production.
+4. Set production environment variables (`MONGODB_URI`, `JWT_SECRET`, `GEMINI_API_KEY`, mail settings) in ECS task definitions or AWS Secrets Manager.
+
+---
+
 ## Environment Variables
 
 Create a `backend/.env` file:
